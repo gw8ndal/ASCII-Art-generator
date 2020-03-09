@@ -1,18 +1,17 @@
-from PIL import Image
 import io
 import easygui
 from resizeimage import resizeimage
 import webbrowser
 
-print("Quelle résolution doit être l'image finale ?")
+print("Quelle largeur doit faire l'image finale ?")
 
-resX = int(input('Résolution X = '))
-resY = int(input('Résolution Y = '))
+resX = int(input('Largeur = '))
+resY = resX
 
-image_path = easygui.fileopenbox()
-image_original = Image.open(image_path)
+image_path = easygui.fileopenbox()	#Demande d'ouvrir l'image avec un GUI
+image_original = Image.open(image_path)	#Ouvre l'image une deuxième fois pour éviter des erreurs sombres
 
-image = resizeimage.resize_thumbnail(image_original, [resX, resY])
+image = resizeimage.resize_thumbnail(image_original, [resX, resY]) #Redimensionne l'image en fonction de la répose a resX et resY
 
 largeur, hauteur = image.size
 
@@ -25,32 +24,25 @@ for y in range(0, hauteur, 2):
 		value = image_nb.getpixel((x, y))
 		if value < 28:
 			output.write('@')
-    
 		elif value < 56:
 			output.write('%')
-    
 		elif value < 84:
 			output.write('#')
-
 		elif value < 112:
 			output.write('*')
-    
 		elif value < 140:
 			output.write('+')
-
 		elif value < 168:
-			output.write('=')
-    
+			output.write('=')    
 		elif value < 196:
 			output.write('-')
-
 		elif value < 224:
 			output.write(':')
 		else :
 			output.write('.')
 	output.write('\n')
 
-with open('Final image.txt', mode='w') as f:
+with open('Final image.txt', mode='w') as f: #Ecrit la variable output dans le fichier file.txt
     print(output.getvalue(), file=f)
 
-webbrowser.open('Final image.txt')
+webbrowser.open('Final image.txt') #Ouvre le fichier texte avec l'image en ASCII
