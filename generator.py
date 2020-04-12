@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+from PIL import Image
 import io
 import easygui
 from resizeimage import resizeimage
 import webbrowser
 
 def main():
-    print("Quelle largeur doit faire l'image finale ?")
-
-    resX = int(input('Largeur = '))
+    
+    resX = int(input('Final image width (Max recommended 400) : '))
     resY = resX
 
     image_path = easygui.fileopenbox()
