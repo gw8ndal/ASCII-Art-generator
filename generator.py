@@ -2,16 +2,16 @@
 
 from PIL import Image
 import io
-import easygui
 from resizeimage import resizeimage
 import webbrowser
+from tkinter import filedialog
 
 def main():
     
     resX = int(input('Final image width (Max recommended 400) : '))
     resY = resX
 
-    image_path = easygui.fileopenbox()
+    image_path = filedialog.askopenfilename()
     image_original = Image.open(image_path)
 
     image = resizeimage.resize_thumbnail(image_original, [resX, resY])
